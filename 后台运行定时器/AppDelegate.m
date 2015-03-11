@@ -8,12 +8,28 @@
 
 #import "AppDelegate.h"
 
-@implementation AppDelegate
+#import <AVFoundation/AVFoundation.h>//添加框架
+
+@implementation AppDelegate{
+    NSTimer *_timer;
+    NSInteger _count;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+
+    //应用可以后台运行的设置
+    NSError *setCategoryErr = nil;
+    NSError *activationErr  = nil;
+    [[AVAudioSession sharedInstance]setCategory: AVAudioSessionCategoryPlayback error: &setCategoryErr];
+    [[AVAudioSession sharedInstance] setActive: YES error: &activationErr];
+    
+    //添加定时器
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startListen:) userInfo:nil repeats:YES];
+    [_timer setFireDate:[NSDate distantFuture]];//关闭定时器
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -27,19 +43,48 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    //设置永久后台运行
+    UIApplication*   app = [UIApplication sharedApplication];
+    __block    UIBackgroundTaskIdentifier bgTask;
+    bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (bgTask != UIBackgroundTaskInvalid)
+            {
+                bgTask = UIBackgroundTaskInvalid;
+            }
+        });
+    }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (bgTask != UIBackgroundTaskInvalid)
+            {
+                bgTask = UIBackgroundTaskInvalid;
+            }
+        });
+    });
+    
+    
+    //开启定时器
+    [_timer setFireDate:[NSDate distantPast]];
+    _count = 0;
+}
+-(void)startListen:(NSTimer *)timer{
+    NSLog(@"正在后台运行");
+    _count++;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    //关闭定时器
+    [_timer setFireDate:[NSDate distantFuture]];
+    NSLog(@"后台运行计数值为：%ld",_count);
 }
+
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {

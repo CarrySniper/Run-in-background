@@ -19,6 +19,7 @@
 		C52C090B1AB0177400628244 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52C08F31AB0177400628244 /* UIKit.framework */; };
 		C52C09131AB0177400628244 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C52C09111AB0177400628244 /* InfoPlist.strings */; };
 		C52C09151AB0177400628244 /* _______Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = C52C09141AB0177400628244 /* _______Tests.m */; };
+		C5955CA11AB01F52009A3593 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5955CA01AB01F52009A3593 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		C52C09101AB0177400628244 /* 后台运行定时器Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "后台运行定时器Tests-Info.plist"; sourceTree = "<group>"; };
 		C52C09121AB0177400628244 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C52C09141AB0177400628244 /* _______Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "_______Tests.m"; sourceTree = "<group>"; };
+		C5955CA01AB01F52009A3593 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5955CA11AB01F52009A3593 /* AVFoundation.framework in Frameworks */,
 				C52C08F21AB0177400628244 /* CoreGraphics.framework in Frameworks */,
 				C52C08F41AB0177400628244 /* UIKit.framework in Frameworks */,
 				C52C08F01AB0177400628244 /* Foundation.framework in Frameworks */,
@@ -96,6 +99,7 @@
 		C52C08EE1AB0177400628244 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C5955CA01AB01F52009A3593 /* AVFoundation.framework */,
 				C52C08EF1AB0177400628244 /* Foundation.framework */,
 				C52C08F11AB0177400628244 /* CoreGraphics.framework */,
 				C52C08F31AB0177400628244 /* UIKit.framework */,
@@ -437,6 +441,7 @@
 				C52C091A1AB0177400628244 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C52C091B1AB0177400628244 /* Build configuration list for PBXNativeTarget "后台运行定时器Tests" */ = {
 			isa = XCConfigurationList;
@@ -445,6 +450,7 @@
 				C52C091D1AB0177400628244 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
